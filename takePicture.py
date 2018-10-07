@@ -2,8 +2,26 @@
 import serial
 import time
 
+def takePic(num):
+        i = 0
+        while i < num:
+                #Take Picture
+                port.write(b'\xAA\x04\x02\x00\x00\x00')
+
+                #Wait for Data
+                time.sleep(10)
+
+                #Thanks Camera
+                port.write(b'\xAA\x0E\x0D\x00\x00\x00')
+        
+                i = i + 1
+
 #Opens port
 port = serial.Serial('/dev/ttyS0')
+
+#Reset Camera
+port.write(b'\xAA\x08\x00\x00\x00\xFF')
+time.sleep(1)
 
 #Syncs Camera
 syncCount = 0
@@ -17,12 +35,6 @@ time.sleep(2)
 
 #Initalize Camera
 port.write(b'\xAA\x01\x00\x08\x09\x07')
+time.sleep(1)
 
-#Take Picture
-port.write(b'\xAA\x04\x02\x00\x00\x00')
-
-#Wait for Data
-time.sleep(10)
-
-#Thanks Camera
-port.write(b'\xAA\x0E\x0D\x00\x00\x00')
+takePic(1)
