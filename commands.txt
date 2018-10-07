@@ -1,0 +1,13 @@
+First Sync Using:
+sync: b'\xAA\x0D\x00\x00\x00\x00'
+
+Once you Recive an ack and sync back Confirm Using:
+ack:  b'\xAA\x0E\x0D\x00\x00\x00'
+
+Wait 2 Sec For Warmup
+
+Initalize the camera using:
+init: b'\xAA\x01\x00\x08\x09\x07'
+
+Take a Picture
+Get Pic: b'\xAA\x04\x02\x00\x00\x00'

@@ -54,8 +54,6 @@ def serialInit():
     serialCmd('cmd_init')
 
     #Start Dataloop
-    loop_datacheck = True
-    #serialListen(serialC)
     
     pass
 
@@ -73,7 +71,6 @@ def serialCmd(command):
         serialC.write(b'\xAA\x01\x00\x08\x09\x07')
         
     elif command == "get_pic":
-        loop_dl = True
         serialC.write(b'\xAA\x04\x02\x00\x00\x00')
         
     elif command == "get_snap":
@@ -92,16 +89,12 @@ def serialCmd(command):
         print("Not yet Implemented")
         
     elif command == "cmd_sync":
-        synced = False
-        while synced == False:
-            line = serialC.readline()
+        syncCount = 0
+        while syncCount < 60:
             serialC.write(b'\xAA\x0D\x00\x00\x00\x00')
-            print(line)
-            if line == (b'\xaa\x0e\r\x00\x00\x00'):
-                synced == True
-            else:
-                synced == False
-                
+            syncCount = syncCount + 1
+        serialC.write(b'\xAA\x0E\x0D\x00\x00\x00')
+        
     elif command == "cmd_ack":
         print("Not yet Implemented")
     elif command == "cmd_nak":
