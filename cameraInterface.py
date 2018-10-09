@@ -37,13 +37,14 @@
 #Import Packages
 import serial
 import time
+import os
 
 #Define Serial Connection, Automaticly Set to 9600 Baud, 8 Bits, No Parity,
 #and One Stopbit
 serialC = serial.Serial('/dev/ttyS0')
 
 #Activate Read Script
-
+os.system('python serialRead.py')
 
 #Reset Camera
 serialC.write(b'\xAA\x08\x00\x00\x00\xFF')
